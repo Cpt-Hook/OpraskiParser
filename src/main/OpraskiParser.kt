@@ -5,7 +5,7 @@ class OpraskiParser {
 
         fun getOpraskiString(message: String): String {
             val mapped1 =
-                applyMap(message.toLowerCase(), firstMap)
+                applyMap(message, firstMap)
 
             var arr = ArrayList(mapped1.split(Regex("\\s+")))
             arr = editWords(arr)
@@ -18,7 +18,13 @@ class OpraskiParser {
             return applyMap(builder.toString(), secondMap)
         }
 
+        private fun String.firstCharToUpperCase(): String{
+            if(this.isEmpty()) return ""
+            return this[0].toUpperCase() + this.substring(1)
+        }
+
         private val firstMap = mapOf(
+            "bychom" to "byzme",
             "ie" to "je",
             "mě" to "mně",
             "js" to "s",
@@ -28,6 +34,8 @@ class OpraskiParser {
             "n" to "m",
             "i" to "y",
             "y" to "i",
+            "ý" to "í",
+            "í" to "ý",
             "s" to "z",
             "z" to "s",
             "ž" to "š",
@@ -55,6 +63,10 @@ class OpraskiParser {
 
                     if (sub == key) {
                         builder.append(value)
+                        i += key.length
+                        continue@loop
+                    }else if(sub == key.firstCharToUpperCase()){
+                        builder.append(value.firstCharToUpperCase())
                         i += key.length
                         continue@loop
                     }
