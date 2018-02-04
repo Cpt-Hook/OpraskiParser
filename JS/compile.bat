@@ -1,1 +1,0 @@
-"C:\Program Files\JetBrains\IntelliJ IDEA 2017.3\plugins\Kotlin\kotlinc\bin\kotlinc-js" -output C:\Users\Ondra\Documents\IntelliJ\Opraski\JS\OpraskiParser.js C:\Users\Ondra\Documents\IntelliJ\Opraski\src\main\OpraskiParser.kt
