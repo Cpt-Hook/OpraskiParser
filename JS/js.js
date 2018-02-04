@@ -1,0 +1,1 @@
+alert("jak se máte?");

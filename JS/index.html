@@ -8,8 +8,45 @@
 <script type="text/javascript" src="lib/kotlin.js"></script>
 <script type="text/javascript" src="OpraskiParser.js"></script>
 <script>
-    var opraski = OpraskiParser.main.OpraskiParser.Companion;
-    console.log(opraski.getOpraskiString_61zpoe$("jak jsi to udělal? Je to dost dobré"))
+    function getOpraskiString(message) {
+        return OpraskiParser.main.OpraskiParser.Companion.getOpraskiString_61zpoe$(message);
+    }
+
+    function loadScript(url, callback) {
+        const script = document.createElement("script");
+        script.src = url;
+        script.charset = "UTF-8";
+        script.type = "text/javascript";
+        if(callback !== undefined)
+            script.onload = callback;
+        document.body.appendChild(script);
+    }
+
+    function loadEverything(callback) {
+        loadScript("http://cpthook.maweb.eu/opraski/lib/kotlin.js", function () {
+            loadScript("http://cpthook.maweb.eu/opraski/OpraskiParser.js", function () {
+                callback()
+            })
+        })
+    }
+
+    function alterTextToOpraski(){
+        const nameArr = ["p", "h1", "h2", "h3", "h4", "h5", "h6", "a", "span"];
+        let elems = [];
+        for(let i = 0; i < nameArr.length; i++){
+            elems.push(document.getElementsByTagName(nameArr[i]));
+        }
+        for(let i = 0; i < elems.length; i++){
+            for(let j = 0; j < elems[i].length; j++){
+                console.log(elems[i][j].innerHTML);
+                elems[i][j].innerHTML = getOpraskiString(elems[i][j].innerHTML);
+            }
+        }
+    }
+
+    alert(getOpraskiString("facebook"))
+
+    // loadEverything(alterTextToOpraski);
 </script>
 </body>
 </html>

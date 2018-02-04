@@ -93,7 +93,7 @@ class OpraskiParser {
 
                     if (arr[i].endsWith("é")) changeEnding(i)
 
-                    if (arr[i].endsWith("k") &&
+                    if (arr[i].endsWith("k") && i != arr.lastIndex &&
                         (arr[i + 1].startsWith("s") || arr[i + 1].startsWith("z"))
                     ) connectX(i)
 
