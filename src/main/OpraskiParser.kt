@@ -31,6 +31,8 @@ class OpraskiParser {
             "mně" to "mě",
             "ch" to "hc",
             "m" to "n",
+            "d" to "t",
+            "t" to "d",
             "n" to "m",
             "i" to "y",
             "y" to "i",
