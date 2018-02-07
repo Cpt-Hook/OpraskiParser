@@ -16,19 +16,15 @@ var OpraskiParser = function (_, Kotlin) {
   var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
   var mapOf_0 = Kotlin.kotlin.collections.mapOf_x2b85n$;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
-  var Kind_CLASS = Kotlin.Kind.CLASS;
   function OpraskiParser() {
-    OpraskiParser$Companion_getInstance();
-  }
-  function OpraskiParser$Companion() {
-    OpraskiParser$Companion_instance = this;
-    this.firstMap_0 = mapOf([to('bychom', 'byzme'), to('ie', 'je'), to('m\u011B', 'mn\u011B'), to('js', 's'), to('mn\u011B', 'm\u011B'), to('ch', 'hc'), to('m', 'n'), to('d', 't'), to('t', 'd'), to('n', 'm'), to('i', 'y'), to('y', 'i'), to('\xFD', '\xED'), to('\xED', '\xFD'), to('s', 'z'), to('z', 's'), to('\u017E', '\u0161'), to('\u0161', '\u017E'), to('b', 'p'), to('p', 'b'), to('v', 'f')]);
+    OpraskiParser_instance = this;
+    this.firstMap_0 = mapOf([to('bychom', 'byzme'), to('ie', 'ije'), to('m\u011B', 'mn\u011B'), to('js', 's'), to('mn\u011B', 'm\u011B'), to('ch', 'hc'), to('m', 'n'), to('d', 't'), to('t', 'd'), to('n', 'm'), to('i', 'y'), to('y', 'i'), to('\xFD', '\xED'), to('\xED', '\xFD'), to('s', 'z'), to('z', 's'), to('\u017E', '\u0161'), to('\u0161', '\u017E'), to('b', 'p'), to('p', 'b'), to('v', 'f')]);
     this.secondMap_0 = mapOf_0(to('k', 'g'));
   }
-  OpraskiParser$Companion.prototype.getOpraskiString_61zpoe$ = function (message) {
+  OpraskiParser.prototype.getOpraskiString_61zpoe$ = function (message) {
     var tmp$;
-    var mapped1 = this.applyMap_0(message, this.firstMap_0);
-    var arr = ArrayList_init(Regex('\\s+').split_905azu$(mapped1, 0));
+    var mapped = this.applyMap_0(message, this.firstMap_0);
+    var arr = ArrayList_init(Regex('\\s+').split_905azu$(mapped, 0));
     arr = this.editWords_0(arr);
     var builder = new StringBuilder();
     tmp$ = arr.iterator();
@@ -40,7 +36,7 @@ var OpraskiParser = function (_, Kotlin) {
     return this.applyMap_0(builder.toString(), this.secondMap_0);
   };
   var unboxChar = Kotlin.unboxChar;
-  OpraskiParser$Companion.prototype.firstCharToUpperCase_0 = function ($receiver) {
+  OpraskiParser.prototype.firstCharToUpperCase_0 = function ($receiver) {
     if ($receiver.length === 0)
       return '';
     var $receiver_0 = $receiver.charCodeAt(0);
@@ -48,7 +44,7 @@ var OpraskiParser = function (_, Kotlin) {
     var other = $receiver.substring(1);
     return String.fromCharCode(tmp$) + other;
   };
-  OpraskiParser$Companion.prototype.applyMap_0 = function (message, map) {
+  OpraskiParser.prototype.applyMap_0 = function (message, map) {
     var tmp$, tmp$_0;
     var builder = new StringBuilder();
     var i = 0;
@@ -84,108 +80,107 @@ var OpraskiParser = function (_, Kotlin) {
     }
     return builder.toString();
   };
-  function OpraskiParser$Companion$editWords$connectPrepositions(closure$arr) {
-    return function (i) {
-      closure$arr.set_wxm5ur$(i + 1 | 0, closure$arr.get_za3lpa$(i) + closure$arr.get_za3lpa$(i + 1 | 0));
-      closure$arr.removeAt_za3lpa$(i);
+  function OpraskiParser$editWords$connectPrepositions(closure$arr, closure$i) {
+    return function () {
+      closure$arr.set_wxm5ur$(closure$i.v + 1 | 0, closure$arr.get_za3lpa$(closure$i.v) + closure$arr.get_za3lpa$(closure$i.v + 1 | 0));
+      closure$arr.removeAt_za3lpa$(closure$i.v);
     };
   }
-  function OpraskiParser$Companion$editWords$changeEnding(closure$arr) {
-    return function (i) {
+  function OpraskiParser$editWords$changeEnding(closure$arr, closure$i) {
+    return function () {
       var tmp$ = closure$arr;
-      var $receiver = closure$arr.get_za3lpa$(i);
-      var endIndex = closure$arr.get_za3lpa$(i).length - 1 | 0;
-      tmp$.set_wxm5ur$(i, $receiver.substring(0, endIndex) + '\xED');
+      var tmp$_0 = closure$i.v;
+      var $receiver = closure$arr.get_za3lpa$(closure$i.v);
+      var endIndex = closure$arr.get_za3lpa$(closure$i.v).length - 1 | 0;
+      tmp$.set_wxm5ur$(tmp$_0, $receiver.substring(0, endIndex) + '\xED');
     };
   }
-  function OpraskiParser$Companion$editWords$connectX(closure$arr) {
-    return function (i) {
+  function OpraskiParser$editWords$connectX(closure$arr, closure$i) {
+    return function () {
       var tmp$ = closure$arr;
-      var $receiver = closure$arr.get_za3lpa$(i);
-      var endIndex = closure$arr.get_za3lpa$(i).length - 1 | 0;
-      tmp$.set_wxm5ur$(i, $receiver.substring(0, endIndex) + 'x' + closure$arr.get_za3lpa$(i + 1 | 0).substring(1));
-      closure$arr.removeAt_za3lpa$(i + 1 | 0);
+      var tmp$_0 = closure$i.v;
+      var $receiver = closure$arr.get_za3lpa$(closure$i.v);
+      var endIndex = closure$arr.get_za3lpa$(closure$i.v).length - 1 | 0;
+      tmp$.set_wxm5ur$(tmp$_0, $receiver.substring(0, endIndex) + 'x' + closure$arr.get_za3lpa$(closure$i.v + 1 | 0).substring(1));
+      closure$arr.removeAt_za3lpa$(closure$i.v + 1 | 0);
     };
   }
-  function OpraskiParser$Companion$editWords$addHookBefore(closure$arr) {
-    return function (char, rep, i) {
+  function OpraskiParser$editWords$addHookBefore(closure$arr, closure$i) {
+    return function (char, rep) {
       var tmp$;
-      var index = indexOf(closure$arr.get_za3lpa$(i), char);
-      tmp$ = closure$arr.get_za3lpa$(i).charCodeAt(index - 1 | 0);
+      var index = indexOf(closure$arr.get_za3lpa$(closure$i.v), char);
+      tmp$ = closure$arr.get_za3lpa$(closure$i.v).charCodeAt(index - 1 | 0);
       if (tmp$ === 100) {
         var tmp$_0 = closure$arr;
-        var $receiver = closure$arr.get_za3lpa$(i);
+        var tmp$_1 = closure$i.v;
+        var $receiver = closure$arr.get_za3lpa$(closure$i.v);
         var endIndex = index - 1 | 0;
-        var tmp$_1 = $receiver.substring(0, endIndex) + String.fromCharCode(toBoxedChar(271)) + rep;
-        var $receiver_0 = closure$arr.get_za3lpa$(i);
+        var tmp$_2 = $receiver.substring(0, endIndex) + String.fromCharCode(toBoxedChar(271)) + rep;
+        var $receiver_0 = closure$arr.get_za3lpa$(closure$i.v);
         var startIndex = index + 1 | 0;
-        tmp$_0.set_wxm5ur$(i, tmp$_1 + $receiver_0.substring(startIndex));
+        tmp$_0.set_wxm5ur$(tmp$_1, tmp$_2 + $receiver_0.substring(startIndex));
       }
        else if (tmp$ === 116) {
-        var tmp$_2 = closure$arr;
-        var $receiver_1 = closure$arr.get_za3lpa$(i);
+        var tmp$_3 = closure$arr;
+        var tmp$_4 = closure$i.v;
+        var $receiver_1 = closure$arr.get_za3lpa$(closure$i.v);
         var endIndex_0 = index - 1 | 0;
-        var tmp$_3 = $receiver_1.substring(0, endIndex_0) + String.fromCharCode(toBoxedChar(357)) + rep;
-        var $receiver_2 = closure$arr.get_za3lpa$(i);
+        var tmp$_5 = $receiver_1.substring(0, endIndex_0) + String.fromCharCode(toBoxedChar(357)) + rep;
+        var $receiver_2 = closure$arr.get_za3lpa$(closure$i.v);
         var startIndex_0 = index + 1 | 0;
-        tmp$_2.set_wxm5ur$(i, tmp$_3 + $receiver_2.substring(startIndex_0));
+        tmp$_3.set_wxm5ur$(tmp$_4, tmp$_5 + $receiver_2.substring(startIndex_0));
       }
        else if (tmp$ === 110) {
-        var tmp$_4 = closure$arr;
-        var $receiver_3 = closure$arr.get_za3lpa$(i);
+        var tmp$_6 = closure$arr;
+        var tmp$_7 = closure$i.v;
+        var $receiver_3 = closure$arr.get_za3lpa$(closure$i.v);
         var endIndex_1 = index - 1 | 0;
-        var tmp$_5 = $receiver_3.substring(0, endIndex_1) + String.fromCharCode(toBoxedChar(328)) + rep;
-        var $receiver_4 = closure$arr.get_za3lpa$(i);
+        var tmp$_8 = $receiver_3.substring(0, endIndex_1) + String.fromCharCode(toBoxedChar(328)) + rep;
+        var $receiver_4 = closure$arr.get_za3lpa$(closure$i.v);
         var startIndex_1 = index + 1 | 0;
-        tmp$_4.set_wxm5ur$(i, tmp$_5 + $receiver_4.substring(startIndex_1));
+        tmp$_6.set_wxm5ur$(tmp$_7, tmp$_8 + $receiver_4.substring(startIndex_1));
       }
     };
   }
-  OpraskiParser$Companion.prototype.editWords_0 = function (arr) {
-    var connectPrepositions = OpraskiParser$Companion$editWords$connectPrepositions(arr);
-    var changeEnding = OpraskiParser$Companion$editWords$changeEnding(arr);
-    var connectX = OpraskiParser$Companion$editWords$connectX(arr);
-    var addHookBefore = OpraskiParser$Companion$editWords$addHookBefore(arr);
-    var i = 0;
-    while (i < arr.size) {
-      if (arr.get_za3lpa$(i).length === 1 && i !== get_lastIndex(arr))
-        connectPrepositions(i);
-      if (endsWith(arr.get_za3lpa$(i), '\xE9'))
-        changeEnding(i);
-      if (endsWith(arr.get_za3lpa$(i), 'k') && i !== get_lastIndex(arr) && (startsWith(arr.get_za3lpa$(i + 1 | 0), 's') || startsWith(arr.get_za3lpa$(i + 1 | 0), 'z')))
-        connectX(i);
-      if (indexOf(arr.get_za3lpa$(i), '\u011B') > 0) {
-        addHookBefore('\u011B', 'e', i);
+  OpraskiParser.prototype.editWords_0 = function (arr) {
+    var i = {v: 0};
+    var connectPrepositions = OpraskiParser$editWords$connectPrepositions(arr, i);
+    var changeEnding = OpraskiParser$editWords$changeEnding(arr, i);
+    var connectX = OpraskiParser$editWords$connectX(arr, i);
+    var addHookBefore = OpraskiParser$editWords$addHookBefore(arr, i);
+    while (i.v < arr.size) {
+      if (arr.get_za3lpa$(i.v).length === 1 && i.v !== get_lastIndex(arr))
+        connectPrepositions();
+      if (endsWith(arr.get_za3lpa$(i.v), '\xE9'))
+        changeEnding();
+      if (endsWith(arr.get_za3lpa$(i.v), 'k') && i.v !== get_lastIndex(arr) && (startsWith(arr.get_za3lpa$(i.v + 1 | 0), 's') || startsWith(arr.get_za3lpa$(i.v + 1 | 0), 'z')))
+        connectX();
+      if (indexOf(arr.get_za3lpa$(i.v), '\u011B') > 0) {
+        addHookBefore('\u011B', 'e');
       }
-      if (indexOf(arr.get_za3lpa$(i), '\xED') > 0) {
-        addHookBefore('\xED', '\xED', i);
+      if (indexOf(arr.get_za3lpa$(i.v), '\xED') > 0) {
+        addHookBefore('\xED', '\xED');
       }
-      i = i + 1 | 0;
+      i.v = i.v + 1 | 0;
     }
     return arr;
   };
-  OpraskiParser$Companion.$metadata$ = {
-    kind: Kind_OBJECT,
-    simpleName: 'Companion',
-    interfaces: []
-  };
-  var OpraskiParser$Companion_instance = null;
-  function OpraskiParser$Companion_getInstance() {
-    if (OpraskiParser$Companion_instance === null) {
-      new OpraskiParser$Companion();
-    }
-    return OpraskiParser$Companion_instance;
-  }
   OpraskiParser.$metadata$ = {
-    kind: Kind_CLASS,
+    kind: Kind_OBJECT,
     simpleName: 'OpraskiParser',
     interfaces: []
   };
-  Object.defineProperty(OpraskiParser, 'Companion', {
-    get: OpraskiParser$Companion_getInstance
-  });
+  var OpraskiParser_instance = null;
+  function OpraskiParser_getInstance() {
+    if (OpraskiParser_instance === null) {
+      new OpraskiParser();
+    }
+    return OpraskiParser_instance;
+  }
   var package$main = _.main || (_.main = {});
-  package$main.OpraskiParser = OpraskiParser;
+  Object.defineProperty(package$main, 'OpraskiParser', {
+    get: OpraskiParser_getInstance
+  });
   Kotlin.defineModule('OpraskiParser', _);
   return _;
 }(typeof OpraskiParser === 'undefined' ? {} : OpraskiParser, kotlin);

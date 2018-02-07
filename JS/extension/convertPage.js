@@ -1,5 +1,5 @@
 function getOpraskiString(message) {
-    return OpraskiParser.main.OpraskiParser.Companion.getOpraskiString_61zpoe$(message);
+    return OpraskiParser.main.OpraskiParser.getOpraskiString_61zpoe$(message);
 }
 
 function convertText(node){
